@@ -1,0 +1,32 @@
+name: strategy-60-bot
+on:
+  schedule:
+    - cron: "*/15 6-16 * * 1-5"   # every 15 min, 09:00–19:59 MSK, weekdays
+  workflow_dispatch:
+concurrency:
+  group: bot
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run one bot step
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TINVEST_TOKEN: ${{ secrets.TINVEST_TOKEN }}
+        run: python -m bot.main --once
+      - name: Save state
+        if: always()
+        run: |
+          git config user.name "strategy-60-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add bot/state.json bot/journal.csv 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "bot state" && git push)

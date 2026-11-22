@@ -1,0 +1,74 @@
+   1 Купил и держи индекс полной доходности        train SR  0.50  valid SR -0.16
+   2 Денежный рынок / флоатеры                     train SR  0.00  valid SR  0.00
+   3 Портфель 60/40 акции/ОФЗ с ежеквартальной реб train SR  0.45  valid SR -0.20
+   4 SMA10 месячная (Faber)                        train SR  0.42  valid SR -0.29
+   5 Абсолютный моментум 12 мес по индексу         train SR  0.19  valid SR -0.39
+   6 Двойной моментум между классами               train SR -0.22  valid SR -0.66
+   7 Золотой крест SMA50/200                       train SR  0.29  valid SR  0.03
+   8 Пробой канала Дончиана 20/10                  train SR -0.35  valid SR  0.63
+   9 Пробой канала Дончиана 55/20                  train SR -0.17  valid SR  0.27
+  10 Трендовая позиция с таргетом волатильности    train SR -0.02  valid SR  0.09
+  11 Кросс-секционный моментум 12-1                train SR  0.83  valid SR -0.38
+  12 Моментум 3/3 для РФ                           train SR  0.32  valid SR  0.17
+  13 Близость к 52-недельному максимуму            train SR  0.25  valid SR -0.01
+  14 Секторная ротация                             train SR  0.57  valid SR -0.34
+  15 Линия относительной силы на новом максимуме   train SR -0.20  valid SR -0.29
+  26 Аномалия низкой волатильности                 train SR  0.49  valid SR -0.17
+  28 Высокая дивидендная доходность                train SR -0.18  valid SR -0.54
+  29 Малая капитализация против индекса            train SR  0.59  valid SR -0.44
+  41 Недельный разворот на крупных бумагах         train SR -0.64  valid SR -1.34
+  42 Откат в лидере моментума                      train SR -2.02  valid SR -0.75
+  40 Выкуп гэпа вниз внутри дня                    train SR  0.00  valid SR -0.14
+  44 Держать только ночью (закрытие → открытие)    train SR -57.74  valid SR -9.69
+  45 Держать только днём (открытие → закрытие)     train SR -10.33  valid SR -7.17
+  49 Эффект смены месяца                           train SR -0.45  valid SR  0.57
+  50 Предпраздничный эффект                        train SR -1.29  valid SR -1.01
+  51 Декабрьское ралли                             train SR  0.15  valid SR  0.43
+  52 «Продавай в мае» (контроль)                   train SR  0.08  valid SR -0.36
+  53 Лучшие месяцы года                            train SR  0.71  valid SR  0.28
+  54 Эффект дня недели                             train SR -3.54  valid SR -2.14
+  55 Январский эффект в малой капитализации        train SR  0.30  valid SR  0.05
+  56 Неделя квартальной экспирации                 train SR -0.61  valid SR -0.37
+  57 Окончание длинных новогодних каникул          train SR  0.29  valid SR  0.52
+  58 Дрейф перед решением ЦБ по ставке             train SR  0.00  valid SR -0.72
+  59 ОФЗ после смягчения ЦБ                        train SR -0.47  valid SR -0.19
+  60 Дивидендный разгон                            train SR  0.89  valid SR  0.84
+  61 Покупка дивидендного гэпа (контроль)          train SR -0.03  valid SR -0.62
+  65 Включение в индекс Мосбиржи                   train SR -0.44  valid SR  0.41
+  70 Спред Сбер обычка/преф                        train SR  0.52  valid SR -0.17
+  71 Спред Татнефть обычка/преф                    train SR  1.05  valid SR -0.26
+  72 Спред Ростелеком обычка/преф                  train SR -0.02  valid SR -0.18
+  73 Сургут-преф и курс доллара                    train SR  0.04  valid SR  0.50
+  39 Отскок после обвала индекса                   train SR -0.02  valid SR -0.19
+ 16i Пересечение MACD с фильтром SMA200 [фонд IMOE train SR -0.16  valid SR  0.56
+ 16s Пересечение MACD с фильтром SMA200 [топ-10 ак train SR -1.08  valid SR -0.51
+ 17i ADX и пересечение DI [фонд IMOEX]             train SR -0.42  valid SR -0.39
+ 17s ADX и пересечение DI [топ-10 акций]           train SR -0.33  valid SR -0.87
+ 18i Supertrend [фонд IMOEX]                       train SR -0.38  valid SR  0.57
+ 18s Supertrend [топ-10 акций]                     train SR -0.49  valid SR -0.03
+ 19i Пробой канала Кельтнера [фонд IMOEX]          train SR -0.13  valid SR -0.12
+ 19s Пробой канала Кельтнера [топ-10 акций]        train SR -0.04  valid SR -0.15
+ 20i Пробой полос Боллинджера [фонд IMOEX]         train SR -0.06  valid SR -0.26
+ 20s Пробой полос Боллинджера [топ-10 акций]       train SR -0.37  valid SR  0.00
+ 21i Пробой NR7 [фонд IMOEX]                       train SR -0.85  valid SR -1.15
+ 21s Пробой NR7 [топ-10 акций]                     train SR -1.00  valid SR -1.15
+ 22i Пробой внутреннего бара [фонд IMOEX]          train SR -1.17  valid SR -0.89
+ 22s Пробой внутреннего бара [топ-10 акций]        train SR -1.00  valid SR -1.16
+ 31i RSI(2) Коннорса [фонд IMOEX]                  train SR -0.74  valid SR -0.69
+ 31s RSI(2) Коннорса [топ-10 акций]                train SR -1.02  valid SR -0.97
+ 32i Double 7 [фонд IMOEX]                         train SR -0.74  valid SR -0.84
+ 32s Double 7 [топ-10 акций]                       train SR -0.79  valid SR -0.94
+ 33i IBS < 0,2 [фонд IMOEX]                        train SR -1.83  valid SR -1.55
+ 33s IBS < 0,2 [топ-10 акций]                      train SR -2.72  valid SR -2.05
+ 34i Три дня падения в аптренде [фонд IMOEX]       train SR -0.68  valid SR -0.84
+ 34s Три дня падения в аптренде [топ-10 акций]     train SR -1.40  valid SR -1.05
+ 35i Кумулятивный RSI(2) [фонд IMOEX]              train SR -0.46  valid SR -0.92
+ 35s Кумулятивный RSI(2) [топ-10 акций]            train SR -1.04  valid SR -0.89
+ 36i Касание нижней полосы Боллинджера [фонд IMOEX train SR  0.17  valid SR -1.29
+ 36s Касание нижней полосы Боллинджера [топ-10 акц train SR -0.27  valid SR -1.02
+ 37i Z-score к SMA20 [фонд IMOEX]                  train SR  0.43  valid SR -0.60
+ 37s Z-score к SMA20 [топ-10 акций]                train SR -0.04  valid SR -0.60
+ 38i Williams %R(2) [фонд IMOEX]                   train SR -1.13  valid SR -0.59
+ 38s Williams %R(2) [топ-10 акций]                 train SR -1.10  valid SR -1.01
+
+финалисты (1): ['60']
