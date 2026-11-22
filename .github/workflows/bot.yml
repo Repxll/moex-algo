@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "*/15 6-16 * * 1-5"   # every 15 min, 09:00–19:59 MSK, weekdays
   workflow_dispatch:
+    inputs:
+      dry_scan:
+        description: "Only print today's signals (no Telegram, no orders)"
+        type: boolean
+        default: false
 concurrency:
   group: bot
   cancel-in-progress: false
@@ -17,7 +22,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Dry scan
+        if: ${{ inputs.dry_scan }}
+        run: python -c "from bot import signals; b,_=signals.scan(); print('signals:', [(x['secid'], round(x['yield'],3), x['days_left']) for x in b])"
       - name: Run one bot step
+        if: ${{ !inputs.dry_scan }}
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
