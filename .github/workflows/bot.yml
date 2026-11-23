@@ -1,7 +1,7 @@
 name: strategy-60-bot
 on:
   schedule:
-    - cron: "*/15 6-16 * * 1-5"   # every 15 min, 09:00–19:59 MSK, weekdays
+    - cron: "7,22,37,52 6-16 * * 1-5"   # every 15 min (off the busy :00), 09:00–19:59 MSK, weekdays
   workflow_dispatch:
     inputs:
       dry_scan:
