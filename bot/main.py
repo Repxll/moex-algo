@@ -19,7 +19,7 @@ SCAN_AT = dt.time(10, 5)
 
 
 OLD_ENV = Path.home() / "moex_signals" / ".env"  # the existing signals bot: same Telegram bot and sandbox account
-CAPITAL = 10_000  # the sandbox account may hold more; #60 sizes positions from this budget only
+CAPITAL = 20_000  # the sandbox account may hold more; #60 sizes positions from this budget only
 
 
 def load_env():
@@ -116,7 +116,10 @@ def on_callback(tg, sb, account, st, cq):
         return
     action, sid = cq["data"].split(":", 1)
     sig = st["pending"].pop(sid, None)
-    tg.call("answerCallbackQuery", callback_query_id=cq["id"])
+    try:
+        tg.call("answerCallbackQuery", callback_query_id=cq["id"])
+    except Exception:
+        pass  # Telegram rejects answers to presses older than a few minutes; the scheduled run is usually later
     if sig is None:
         tg.send("Сигнал уже обработан.")
         return
