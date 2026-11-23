@@ -1,7 +1,9 @@
 name: strategy-60-bot
+# A self-relaying loop: each run polls Telegram for ~5 h, then starts the next run.
+# The schedule is only a safety net in case the chain breaks (GitHub cron is best-effort).
 on:
   schedule:
-    - cron: "7,22,37,52 6-16 * * 1-5"   # every 15 min (off the busy :00), 09:00–19:59 MSK, weekdays
+    - cron: "17 */3 * * *"
   workflow_dispatch:
     inputs:
       dry_scan:
@@ -13,29 +15,34 @@ concurrency:
   cancel-in-progress: false
 permissions:
   contents: write
+  actions: write
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 330
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Configure git
+        run: |
+          git config user.name "strategy-60-bot"
+          git config user.email "bot@users.noreply.github.com"
       - name: Dry scan
         if: ${{ inputs.dry_scan }}
         run: python -c "from bot import signals; b,_=signals.scan(); print('signals:', [(x['secid'], round(x['yield'],3), x['days_left']) for x in b])"
-      - name: Run one bot step
+      - name: Bot loop
         if: ${{ !inputs.dry_scan }}
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TINVEST_TOKEN: ${{ secrets.TINVEST_TOKEN }}
-        run: python -m bot.main --once
-      - name: Save state
-        if: always()
+        run: python -m bot.main --loop-minutes=300
+      - name: Start next run
+        if: ${{ always() && !inputs.dry_scan && !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "strategy-60-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add bot/state.json bot/journal.csv 2>/dev/null || true
-          git diff --cached --quiet || (git commit -m "bot state" && git push)
+          n=$(gh run list --workflow bot.yml --status queued --json databaseId -q length)
+          [ "$n" -eq 0 ] && gh workflow run bot.yml || echo "next run already queued"

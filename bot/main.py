@@ -159,7 +159,7 @@ def step(tg, sb, account, st, poll_timeout):
     save_state(st)
 
 
-def main(once=False):
+def main(once=False, loop_minutes=None, persist=None):
     env = load_env()
     tg, sb = Telegram(env["TELEGRAM_TOKEN"], env["TELEGRAM_CHAT_ID"]), Sandbox(env["TINVEST_TOKEN"])
     st = load_state()
@@ -171,11 +171,28 @@ def main(once=False):
     if once:
         step(tg, sb, account, st, poll_timeout=0)
         return
-    while True:
-        step(tg, sb, account, st, poll_timeout=60)
+    deadline = time.time() + loop_minutes * 60 if loop_minutes else None
+    while deadline is None or time.time() < deadline:
+        before = STATE.read_text() if STATE.exists() else ""
+        step(tg, sb, account, st, poll_timeout=25)
+        if persist and STATE.read_text() != before:
+            persist()
         time.sleep(1)
 
 
+def git_persist():
+    """Commit state and journal right away, so a cancelled run cannot replay an executed order."""
+    import subprocess
+    run = lambda *a: subprocess.run(["git", *a], cwd=HERE.parent, capture_output=True)
+    run("add", "bot/state.json", "bot/journal.csv")
+    if run("diff", "--cached", "--quiet").returncode:
+        run("commit", "-m", "bot state")
+        run("pull", "--rebase", "-q")
+        run("push", "-q")
+
+
 if __name__ == "__main__":
+    import os
     import sys
-    main(once="--once" in sys.argv)
+    loop = next((int(a.split("=")[1]) for a in sys.argv if a.startswith("--loop-minutes=")), None)
+    main(once="--once" in sys.argv, loop_minutes=loop, persist=git_persist if os.environ.get("GITHUB_ACTIONS") else None)
