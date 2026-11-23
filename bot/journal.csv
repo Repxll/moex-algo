@@ -2,3 +2,4 @@ time,event,details
 2026-11-23T13:16:54+03:00,skip_lot,"{""secid"": ""LKOH"", ""price"": 5698.0, ""lot"": 1, ""dividend"": 535.0, ""yield"": 0.0938925938925939, ""announced"": ""2026-11-23"", ""last_day"": ""2026-12-08"", ""days_left"": 11}"
 2026-11-23T13:16:54+03:00,signal,"{""id"": ""buy-X5-2026-12-10"", ""secid"": ""X5"", ""price"": 2272.5, ""lot"": 1, ""dividend"": 204.0, ""yield"": 0.08976897689768977, ""announced"": ""2026-11-23"", ""last_day"": ""2026-12-10"", ""days_left"": 13}"
 2026-11-23T13:18:02+03:00,skip_lot,"{""secid"": ""LKOH"", ""price"": 5698.5, ""lot"": 1, ""dividend"": 535.0, ""yield"": 0.09388435553215758, ""announced"": ""2026-11-23"", ""last_day"": ""2026-12-08"", ""days_left"": 11}"
+2026-11-23T13:21:59+03:00,executed,"{""id"": ""buy-X5-2026-12-10"", ""side"": ""buy"", ""lots"": 1, ""status"": ""EXECUTION_REPORT_STATUS_FILL"", ""price"": {""currency"": ""rub"", ""units"": ""2291"", ""nano"": 500000000}}"
