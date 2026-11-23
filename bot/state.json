@@ -1,7 +1,20 @@
 {
  "positions": [],
- "pending": {},
- "last_scan": null,
- "offset": 0,
+ "pending": {
+  "buy-X5-2026-12-10": {
+   "side": "buy",
+   "lots": 1,
+   "secid": "X5",
+   "price": 2272.5,
+   "lot": 1,
+   "dividend": 204.0,
+   "yield": 0.08976897689768977,
+   "announced": "2026-11-23",
+   "last_day": "2026-12-10",
+   "days_left": 13
+  }
+ },
+ "last_scan": "2026-11-23",
+ "offset": 691013850,
  "account": "75454fc4-7211-4c75-b42a-cbd2c06c9ed4"
 }
